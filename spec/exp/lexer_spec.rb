@@ -16,10 +16,15 @@ describe Exp::Lexer do
   end
 
   describe '.tokenize' do
-    let(:lexer) { Exp::Lexer.new('6 * x') }
+    let(:lexer)  { Exp::Lexer.new('6 * x') }
+    let(:tokens) { [[:NUMBER, 6], [:MULTI, '*'], [:VAR, 'x']] }
 
     it 'fully tokenizes a mathematical expression' do
-      expect(lexer.tokenize).to eq([[:NUMBER, 6], [:MULTI, '*'], [:VAR, 'x']])
+      expect(lexer.tokenize).to eq(tokens)
+    end
+
+    it 'resets the lexer' do
+      2.times { expect(lexer.tokenize).to eq(tokens) }
     end
   end
 end
