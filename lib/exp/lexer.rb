@@ -45,11 +45,11 @@ module Exp
       end
     end
 
-    private
     def reset
       set_scanner(@expression)
     end
 
+    private
     private
     def set_scanner(expression)
       @scanner = StringScanner.new(expression.delete(' '))
