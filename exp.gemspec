@@ -8,7 +8,6 @@ Gem::Specification.new do |gem|
   gem.version       = Exp::VERSION
   gem.authors       = ["Miguel Guinada"]
   gem.email         = ["mguinada@gmail.com"]
-  gem.description   = %q{a simple mathematical expression interpreter}
   gem.summary       = %q{a simple mathematical expression interpreter}
   gem.homepage      = ""
 
@@ -17,8 +16,8 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
+  gem.add_development_dependency 'racc', '~> 1.4.9'
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'rspec'
   gem.add_development_dependency 'simplecov'
-  gem.add_development_dependency 'pry'
 end

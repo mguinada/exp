@@ -50,7 +50,6 @@ module Exp
     end
 
     private
-    private
     def set_scanner(expression)
       @scanner = StringScanner.new(expression.delete(' '))
     end

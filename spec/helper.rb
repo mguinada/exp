@@ -1,5 +1,4 @@
 require 'simplecov'
-require 'pry'
 
 #setup simplecov
 SimpleCov.start do

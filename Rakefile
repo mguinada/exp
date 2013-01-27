@@ -1,8 +1,20 @@
 require "bundler/gem_tasks"
 require 'rspec/core/rake_task'
 
+desc 'Compile racc parser.y'
+task :compile => 'lib/exp/parser.rb'
+
+desc 'Test'
 task :test    => :spec
+
+desc 'Run specs'
+task :spec    => :compile
+
 task :default => :spec
+
+rule '.rb' => '.y' do |t|
+  sh "racc -l -o #{t.name} #{t.source}"
+end
 
 RSpec::Core::RakeTask.new do |task|
   task.rspec_opts = ["-c", "-f documentation", "-r ./spec/helper.rb"]
@@ -10,7 +22,7 @@ RSpec::Core::RakeTask.new do |task|
 end
 
 desc "Open an interactive session preloaded with this gem's code"
-task :console do
+task :console => :compile do
   if gem_available?("pry")
     sh "pry -I lib -r exp.rb"
   else
