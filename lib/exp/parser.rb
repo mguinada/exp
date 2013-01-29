@@ -25,30 +25,34 @@ end
 ##### State transition tables begin ###
 
 racc_action_table = [
-    16,     6,     7,     8,     9,     6,     7,     8,     9,     6,
-     7,     8,     9,     6,     7,     8,     9,     6,     7,     8,
-     9,     6,     7,     8,     9,     4,     3,     4,     3,     4,
-     3,     4,     3,     4,     3,     4,     3,     5,    11 ]
+     4,     3,     4,     3,     4,     3,     4,     3,     5,    13,
+     5,     6,     5,    11,     5,     4,     3,     4,     3,     4,
+     3,    11,   nil,     5,   nil,     5,   nil,     5,    19,     7,
+     8,     9,    10,    11,     7,     8,     9,    10,    11,     9,
+    10,    11,     9,    10,    11 ]
 
 racc_action_check = [
-    10,    10,    10,    10,    10,    13,    13,    13,    13,     2,
-     2,     2,     2,    14,    14,    14,    14,    12,    12,    12,
-    12,    15,    15,    15,    15,     8,     8,     7,     7,     9,
-     9,     6,     6,     3,     3,     0,     0,     1,     5 ]
+     0,     0,    11,    11,    10,    10,     3,     3,     0,     6,
+    11,     1,    10,    16,     3,     8,     8,     7,     7,     9,
+     9,    17,   nil,     8,   nil,     7,   nil,     9,    12,    12,
+    12,    12,    12,    12,     2,     2,     2,     2,     2,    15,
+    15,    15,    14,    14,    14 ]
 
 racc_action_pointer = [
-    33,    37,     4,    31,   nil,    38,    29,    25,    23,    27,
-    -4,   nil,    12,     0,     8,    16,   nil ]
+    -2,    11,    29,     4,   nil,   nil,     9,    15,    13,    17,
+     2,     0,    24,   nil,    35,    32,     4,    12,   nil,   nil ]
 
 racc_action_default = [
-    -2,    -9,    -1,    -9,    -8,    -9,    -9,    -9,    -9,    -9,
-    -9,    17,    -3,    -4,    -5,    -6,    -7 ]
+    -2,   -11,    -1,   -11,    -9,   -10,   -11,   -11,   -11,   -11,
+   -11,   -11,   -11,    20,    -3,    -4,    -5,    -6,    -7,    -8 ]
 
 racc_goto_table = [
-     2,     1,   nil,    10,   nil,   nil,    12,    13,    14,    15 ]
+     2,     1,   nil,    12,   nil,   nil,   nil,    14,    15,    16,
+    17,    18 ]
 
 racc_goto_check = [
-     2,     1,   nil,     2,   nil,   nil,     2,     2,     2,     2 ]
+     2,     1,   nil,     2,   nil,   nil,   nil,     2,     2,     2,
+     2,     2 ]
 
 racc_goto_pointer = [
    nil,     1,     0 ]
@@ -58,18 +62,20 @@ racc_goto_default = [
 
 racc_reduce_table = [
   0, 0, :racc_error,
-  1, 10, :_reduce_1,
-  0, 10, :_reduce_2,
-  3, 11, :_reduce_3,
-  3, 11, :_reduce_4,
-  3, 11, :_reduce_5,
-  3, 11, :_reduce_6,
-  3, 11, :_reduce_7,
-  1, 11, :_reduce_8 ]
+  1, 12, :_reduce_1,
+  0, 12, :_reduce_2,
+  3, 13, :_reduce_3,
+  3, 13, :_reduce_4,
+  3, 13, :_reduce_5,
+  3, 13, :_reduce_6,
+  3, 13, :_reduce_7,
+  3, 13, :_reduce_8,
+  1, 13, :_reduce_9,
+  1, 13, :_reduce_10 ]
 
-racc_reduce_n = 9
+racc_reduce_n = 11
 
-racc_shift_n = 17
+racc_shift_n = 20
 
 racc_token_table = {
   false => 0,
@@ -80,9 +86,11 @@ racc_token_table = {
   :ADD => 5,
   :SUB => 6,
   :MULTI => 7,
-  :DIV => 8 }
+  :DIV => 8,
+  :POW => 9,
+  :VAR => 10 }
 
-racc_nt_base = 9
+racc_nt_base = 11
 
 racc_use_result_var = true
 
@@ -112,6 +120,8 @@ Racc_token_to_s_table = [
   "SUB",
   "MULTI",
   "DIV",
+  "POW",
+  "VAR",
   "$start",
   "program",
   "expression" ]
@@ -153,12 +163,22 @@ def _reduce_6(val, _values, result)
 end
 
 def _reduce_7(val, _values, result)
- result = Exp::AST::Brackets.new(val[1]) 
+ result = Exp::AST::Exponentiation.new(val[0], val[2]) 
     result
 end
 
 def _reduce_8(val, _values, result)
+ result = Exp::AST::Brackets.new(val[1]) 
+    result
+end
+
+def _reduce_9(val, _values, result)
  result = Exp::AST::Number.new(val[0]) 
+    result
+end
+
+def _reduce_10(val, _values, result)
+ result = Exp::AST::Variable.new(val[0]) 
     result
 end
 

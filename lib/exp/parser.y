@@ -1,8 +1,15 @@
 class Exp::Parser
-  token NUMBER LEFT_BRACKET RIGHT_BRACKET ADD SUB MULTI DIV
+  token NUMBER LEFT_BRACKET RIGHT_BRACKET ADD SUB MULTI DIV POW VAR
+
+  prechigh
+    left POW
+    left MULTI DIV
+    left ADD SUB
+  preclow
+
+  expect 3
 
   rule
-    #terminal rule
     program: expression                               { result = Exp::AST.new([val[0]]) }
            | /* none */                               { result = Exp::AST.new([]) }
 
@@ -10,8 +17,10 @@ class Exp::Parser
               | expression SUB expression             { result = Exp::AST::Subtraction.new(val[0], val[2]) }
               | expression MULTI expression           { result = Exp::AST::Multiplication.new(val[0], val[2]) }
               | expression DIV expression             { result = Exp::AST::Division.new(val[0], val[2]) }
+              | expression POW expression             { result = Exp::AST::Exponentiation.new(val[0], val[2]) }
               | LEFT_BRACKET expression RIGHT_BRACKET { result = Exp::AST::Brackets.new(val[1]) }
               | NUMBER                                { result = Exp::AST::Number.new(val[0]) }
+              | VAR                                   { result = Exp::AST::Variable.new(val[0]) }
 end
 
 ---- header

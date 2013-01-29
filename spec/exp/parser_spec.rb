@@ -6,6 +6,16 @@ describe Exp::Parser do
       expect(parser.parse('1')).to eq(Exp::AST::Trunk.new([Exp::AST::Number.new(1)]))
     end
 
+    context 'variables' do
+      it 'only single letter' do
+        expect(parser.parse('x')).to eq(Exp::AST::Trunk.new([Exp::AST::Variable.new('x')]))
+      end
+
+      it 'raises error on multiple letter variables' do
+        expect { parser.parse('xy') }.to raise_error(Racc::ParseError)
+      end
+    end
+
     it 'addition' do
       expect(parser.parse('2 + 3')).to eq(Exp::AST::Trunk.new([Exp::AST::Addition.new(
                                                                  Exp::AST::Number.new(2),
@@ -42,6 +52,13 @@ describe Exp::Parser do
                                                                     Exp::AST::Number.new(3),
                                                                   )
                                                                 )]))
+    end
+
+    it 'exponentiation' do
+      expect(parser.parse('2 ^ 3')).to eq(Exp::AST::Trunk.new([Exp::AST::Exponentiation.new(
+                                                                Exp::AST::Number.new(2),
+                                                                Exp::AST::Number.new(3),
+                                                              )]))
     end
   end
 end

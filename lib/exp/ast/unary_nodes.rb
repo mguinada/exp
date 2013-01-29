@@ -12,8 +12,8 @@ module Exp
       end
     end
 
-    class ValueNode < UnaryNode; end
-    class Number < ValueNode; end
     class Brackets < UnaryNode; end
+    class Number < UnaryNode; end
+    class Variable < UnaryNode; end
   end
 end

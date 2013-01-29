@@ -17,5 +17,6 @@ module Exp
     class Subtraction < BinaryNode; end
     class Multiplication < BinaryNode; end
     class Division < BinaryNode; end
+    class Exponentiation < BinaryNode; end
   end
 end
