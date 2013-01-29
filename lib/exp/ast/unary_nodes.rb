@@ -1,6 +1,6 @@
 module Exp
-  module AST
-    class UnaryNode
+  class AST
+    class UnaryNode < Node
       attr_reader :value
 
       def initialize(value)

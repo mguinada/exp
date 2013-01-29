@@ -11,8 +11,8 @@ class Exp::Parser
   expect 3
 
   rule
-    program: expression                               { result = Exp::AST.new([val[0]]) }
-           | /* none */                               { result = Exp::AST.new([]) }
+    program: expression                               { result = Exp::AST.new(val[0]) }
+           | /* none */                               { result = Exp::AST.new }
 
     expression: expression ADD expression             { result = Exp::AST::Addition.new(val[0], val[2]) }
               | expression SUB expression             { result = Exp::AST::Subtraction.new(val[0], val[2]) }

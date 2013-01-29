@@ -1,7 +1,7 @@
 module Exp
-  module AST
+  class AST
     #Base class for all binary nodes
-    class BinaryNode
+    class BinaryNode < Node
       attr_reader :left, :right
 
       def initialize(left, right)

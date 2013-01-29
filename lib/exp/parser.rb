@@ -140,12 +140,12 @@ Racc_debug_parser = false
 # reduce 0 omitted
 
 def _reduce_1(val, _values, result)
- result = Exp::AST.new([val[0]]) 
+ result = Exp::AST.new(val[0]) 
     result
 end
 
 def _reduce_2(val, _values, result)
- result = Exp::AST.new([]) 
+ result = Exp::AST.new 
     result
 end
 
