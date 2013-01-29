@@ -2,6 +2,7 @@ class Exp::Parser
   token NUMBER LEFT_BRACKET RIGHT_BRACKET ADD SUB MULTI DIV POW VAR
 
   prechigh
+    nonassoc UMINUS
     left POW
     left MULTI DIV
     left ADD SUB
@@ -19,6 +20,7 @@ class Exp::Parser
               | expression DIV expression             { result = Exp::AST::Division.new(val[0], val[2]) }
               | expression POW expression             { result = Exp::AST::Exponentiation.new(val[0], val[2]) }
               | LEFT_BRACKET expression RIGHT_BRACKET { result = Exp::AST::Brackets.new(val[1]) }
+              | SUB NUMBER =UMINUS                    { result = Exp::AST::Number.new(-1 * val[1]) }
               | NUMBER                                { result = Exp::AST::Number.new(val[0]) }
               | VAR                                   { result = Exp::AST::Variable.new(val[0]) }
 end

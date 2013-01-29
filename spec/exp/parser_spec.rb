@@ -2,12 +2,18 @@ describe Exp::Parser do
   let(:parser) { Exp::Parser.new }
 
   context 'parses expressions into an abstract syntax trees' do
-    it 'numbers' do
-      expect(parser.parse('1')).to eq(Exp::AST::Trunk.new([Exp::AST::Number.new(1)]))
+    context 'numbers' do
+      it 'positive' do
+        expect(parser.parse('1')).to eq(Exp::AST::Trunk.new([Exp::AST::Number.new(1)]))
+      end
+
+      it 'negative' do
+        expect(parser.parse('-1')).to eq(Exp::AST::Trunk.new([Exp::AST::Number.new(-1)]))
+      end
     end
 
     context 'variables' do
-      it 'only single letter' do
+      it 'single letter' do
         expect(parser.parse('x')).to eq(Exp::AST::Trunk.new([Exp::AST::Variable.new('x')]))
       end
 
