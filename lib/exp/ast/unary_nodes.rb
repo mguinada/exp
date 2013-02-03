@@ -11,9 +11,9 @@ module Exp
         self.class == other.class && self.value == other.value
       end
     end
-
+    class Literal < UnaryNode; end
     class Brackets < UnaryNode; end
-    class Number < UnaryNode; end
-    class Variable < UnaryNode; end
+    class Number < Literal; end
+    class Variable < Literal; end
   end
 end

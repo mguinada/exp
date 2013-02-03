@@ -2,10 +2,10 @@ module Exp
   class AST
     #Base class for all binary nodes
     class BinaryNode < Node
-      attr_reader :left, :right
+      attr_reader :symbol, :left, :right
 
-      def initialize(left, right)
-        @left, @right = left, right
+      def initialize(symbol, left, right)
+        @symbol, @left, @right = symbol, left, right
       end
 
       def ==(other)
@@ -13,10 +13,34 @@ module Exp
       end
     end
 
-    class Addition < BinaryNode; end
-    class Subtraction < BinaryNode; end
-    class Multiplication < BinaryNode; end
-    class Division < BinaryNode; end
-    class Exponentiation < BinaryNode; end
+    class Addition < BinaryNode
+      def initialize(left, right)
+        super('+', left, right)
+      end
+    end
+
+    class Subtraction < BinaryNode
+      def initialize(left, right)
+        super('-', left, right)
+      end
+    end
+
+    class Multiplication < BinaryNode
+      def initialize(left, right)
+        super('*', left, right)
+      end
+    end
+
+    class Division < BinaryNode
+      def initialize(left, right)
+        super('/', left, right)
+      end
+    end
+
+    class Exponentiation < BinaryNode
+      def initialize(left, right)
+        super('^', left, right)
+      end
+    end
   end
 end
