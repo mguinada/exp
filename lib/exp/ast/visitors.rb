@@ -24,17 +24,6 @@ module Exp
           self.__send__(method, node) unless method.nil?
         end
 
-        #Default visit for binary nodes
-        def visit_binary_node(node)
-          visit(node.left)
-          visit(node.right)
-        end
-
-        #Default visit for binary nodes
-        def visit_unary_node(node)
-          visit(node.value) unless node.literal?
-        end
-
         private
         def visitor_method(node_class)
           "visit_#{underscore(node_class.name)}"
@@ -47,6 +36,20 @@ module Exp
                     .gsub(/([a-z\d])([A-Z])/,'\1_\2')
                     .tr("-", "_")
                     .downcase
+        end
+      end
+
+      #Typical binary & unary visits
+      module Navigation
+        #Default visit for binary nodes
+        def visit_binary_node(node)
+          visit(node.left)
+          visit(node.right)
+        end
+
+        #Default visit for binary nodes
+        def visit_unary_node(node)
+          visit(node.value) unless node.literal?
         end
       end
     end

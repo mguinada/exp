@@ -1,7 +1,8 @@
 describe Exp::AST::Visitors::Visitor do
   class Visitor < Exp::AST::Visitors::Visitor
-    attr_reader :call_stack
+    include Exp::AST::Visitors::Navigation
 
+    attr_reader :call_stack
     def initialize; @call_stack = []; end
 
     def visit_unary_node(node)
@@ -21,7 +22,6 @@ describe Exp::AST::Visitors::Visitor do
 
   let!(:ast)     { Exp::Parser.new.parse('2 + x / 3') }
   let!(:visitor) { Visitor.new }
-
 
   it 'implements double dispatching' do
     ast.accept(visitor)
