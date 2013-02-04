@@ -39,7 +39,8 @@ module Exp
         end
       end
 
-      #Typical binary & unary visits
+      #Typical binary & unary visits that may be
+      #mixedin into visitor implementations
       module Navigation
         #Default visit for binary nodes
         def visit_binary_node(node)
