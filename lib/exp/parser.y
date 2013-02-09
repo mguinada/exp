@@ -31,7 +31,7 @@ require 'exp/ast'
 
 ---- inner
 def parse(expression, show_tokens = false)
-  @tokenizer = Exp::Lexer.new(expression)
+  @tokenizer = Exp::Lexer.new(String(expression))
   puts @tokenizer.tokenize.inspect if show_tokens
 
   do_parse

@@ -1,3 +1,5 @@
+require 'exp/ast/context'
 require 'exp/ast/ast'
+require 'exp/ast/node'
 require 'exp/ast/unary_nodes'
 require 'exp/ast/binary_nodes'

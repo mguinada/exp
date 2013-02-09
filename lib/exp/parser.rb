@@ -13,7 +13,7 @@ module Exp
   class Parser < Racc::Parser
 
 def parse(expression, show_tokens = false)
-  @tokenizer = Exp::Lexer.new(expression)
+  @tokenizer = Exp::Lexer.new(String(expression))
   puts @tokenizer.tokenize.inspect if show_tokens
 
   do_parse

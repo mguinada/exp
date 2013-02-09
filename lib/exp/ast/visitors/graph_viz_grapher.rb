@@ -32,8 +32,8 @@ module Exp
         end
 
         def graph_binary_node(graph_viz_node, node)
-          @graph.add_edges(graph_viz_node, visit(node.left), dir: 'back')
-          @graph.add_edges(graph_viz_node, visit(node.right), dir: 'back')
+          @graph.add_edges(graph_viz_node, visit(node.left), dir: 'none')
+          @graph.add_edges(graph_viz_node, visit(node.right), dir: 'none')
           graph_viz_node
         end
       end

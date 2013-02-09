@@ -1,8 +1,34 @@
 describe Exp::AST do
-  let(:ast) { Exp::Parser.new.parse('1 + 2 + (3 + 4)') }
+  let(:ast) { Exp::Parser.new.parse('((7 - 2) / 0.5 * 9 ^ 2 + 1) / -99') }
+
+  context 'evaluates' do
+    it 'on defined mathematical operations' do
+      expect(ast.eval).to eq(-8.191919191919192)
+
+    end
+
+    it 'empty expression evaluation returns nil' do
+      expect(Exp::Parser.new.parse(nil).eval).to be_nil
+      expect(Exp::Parser.new.parse('').eval).to be_nil
+    end
+
+    context 'variables' do
+      let(:ast) { Exp::Parser.new.parse('((7 - 2) / 0.5 * 9 ^ 2 + x) / y') }
+
+      it 'when binded' do
+        ast.bind(x: 0.5, y: 75)
+        expect(ast.eval).to eq(10.806666666666667)
+      end
+
+      it 'raises error when undefined' do
+        expect { ast.eval }.to raise_error(Exp::UndefinedVariable)
+      end
+    end
+  end
 
   it 'is enumerable' do
-    expect(ast.select(&:literal?).map(&:value)).to eq([1, 2, 3, 4])
+    ast = Exp::Parser.new.parse('1 * 2 / (3 + 4) - 5')
+    expect(ast.select(&:literal?).map(&:value)).to eq([1, 2, 3, 4, 5])
   end
 
   context 'provides graphical representations' do

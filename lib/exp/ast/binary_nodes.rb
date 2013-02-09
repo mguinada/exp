@@ -11,11 +11,19 @@ module Exp
       def ==(other)
         self.class == other.class && self.left == other.left && self.right == other.right
       end
+
+      def eval(ctx, operator)
+        left.eval(ctx).send(operator, right.eval(ctx))
+      end
     end
 
     class Addition < BinaryNode
       def initialize(left, right)
         super('+', left, right)
+      end
+
+      def eval(ctx)
+        super(ctx, :+)
       end
     end
 
@@ -23,11 +31,19 @@ module Exp
       def initialize(left, right)
         super('-', left, right)
       end
+
+      def eval(ctx)
+        super(ctx, :-)
+      end
     end
 
     class Multiplication < BinaryNode
       def initialize(left, right)
         super('*', left, right)
+      end
+
+      def eval(ctx)
+        super(ctx, :*)
       end
     end
 
@@ -35,11 +51,19 @@ module Exp
       def initialize(left, right)
         super("\/", left, right)
       end
+
+      def eval(ctx)
+        super(ctx, :/)
+      end
     end
 
     class Exponentiation < BinaryNode
       def initialize(left, right)
         super('^', left, right)
+      end
+
+      def eval(ctx)
+        super(ctx, :**)
       end
     end
   end

@@ -4,10 +4,15 @@ module Exp
   # The abstract sytanx tree
   class AST
     include Enumerable
-    attr_reader :root
+    attr_reader :root, :context
 
     def initialize(root = nil)
       @root = root
+      @context = Context.new
+    end
+
+    def bind(hash = {})
+      @context.bind(hash)
     end
 
     def accept(visitor)
@@ -16,6 +21,11 @@ module Exp
 
     def each(&block)
       root.accept(Visitors::Each.new(block))
+    end
+
+    def eval
+      return nil if root.nil?
+      root.eval(context)
     end
 
     def ==(other)
@@ -38,24 +48,6 @@ module Exp
 
       root.accept(visitor)
       visitor
-    end
-
-    #Base node
-    class Node
-      include Visitable
-
-      def literal?
-        is_a?(Exp::AST::Literal)
-      end
-      alias :terminal? :literal?
-
-      def binary?
-        is_a?(Exp::AST::BinaryNode)
-      end
-
-      def unary?
-        is_a?(Exp::AST::UnaryNode)
-      end
     end
   end
 end
