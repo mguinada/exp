@@ -1,7 +1,7 @@
 module Exp
   class AST
     module Visitors
-      class EachVisitor < Visitor
+      class Each < Visitor
         include Navigation
         attr_reader :block
 

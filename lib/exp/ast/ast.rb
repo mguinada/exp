@@ -14,16 +14,30 @@ module Exp
       root.accept(visitor)
     end
 
-    def evaluate
-      nil
-    end
-
     def each(&block)
-      root.accept(Visitors::EachVisitor.new(block))
+      root.accept(Visitors::Each.new(block))
     end
 
     def ==(other)
       self.class == other.class && self.root == other.root
+    end
+
+    def print(opts = {})
+      grapher = grapher(opts)
+      grapher.print
+      grapher
+    end
+
+    def grapher(opts = {})
+      visitor = case opts.fetch(:engine, 'ascii').to_s
+                when 'graphviz'
+                  Visitors::GraphVizGrapher.new
+                else
+                  Visitors::AsciiGrapher.new
+                end
+
+      root.accept(visitor)
+      visitor
     end
 
     #Base node
@@ -33,6 +47,7 @@ module Exp
       def literal?
         is_a?(Exp::AST::Literal)
       end
+      alias :terminal? :literal?
 
       def binary?
         is_a?(Exp::AST::BinaryNode)

@@ -9,7 +9,7 @@ module Exp
       end
 
       def ==(other)
-        self.class == other.class && @left = other.left && @right = other.right
+        self.class == other.class && self.left == other.left && self.right == other.right
       end
     end
 
@@ -33,7 +33,7 @@ module Exp
 
     class Division < BinaryNode
       def initialize(left, right)
-        super('/', left, right)
+        super("\/", left, right)
       end
     end
 

@@ -13,7 +13,7 @@ module Exp
         # Handles visitor's double dispatch by looking up
         # for a visitor's method that matches the visited node's type prefixed by 'visit_'.
         # If one is not found at the node's class, lookup will be made at's it's
-        #ancestor and so on.
+        # ancestor and so on.
         def visit(node)
           method = catch(:method) do
             node.class.ancestors.each do |ancestor|
@@ -24,7 +24,7 @@ module Exp
           self.__send__(method, node) unless method.nil?
         end
 
-        private
+        protected
         def visitor_method(node_class)
           "visit_#{underscore(node_class.name)}"
         end
@@ -50,7 +50,7 @@ module Exp
 
         #Default visit for binary nodes
         def visit_unary_node(node)
-          visit(node.value) unless node.literal?
+          visit(node.value) unless node.terminal?
         end
       end
     end
