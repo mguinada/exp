@@ -175,7 +175,7 @@ def _reduce_7(val, _values, result)
 end
 
 def _reduce_8(val, _values, result)
- result = Exp::AST::Brackets.new(val[1]) 
+ result = val[1] 
     result
 end
 

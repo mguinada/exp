@@ -4,7 +4,6 @@ describe Exp::AST do
   context 'evaluates' do
     it 'on defined mathematical operations' do
       expect(ast.eval).to eq(-8.191919191919192)
-
     end
 
     it 'empty expression evaluation returns nil' do

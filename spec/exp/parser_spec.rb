@@ -46,14 +46,6 @@ describe Exp::Parser do
                                                          Exp::AST::Number.new(3))))
     end
 
-
-    it 'brackets' do
-      expect(parser.parse('(2 - 3)')).to eq(Exp::AST.new(Exp::AST::Brackets.new(
-                                                           Exp::AST::Subtraction.new(
-                                                             Exp::AST::Number.new(2),
-                                                             Exp::AST::Number.new(3)))))
-    end
-
     it 'exponentiation' do
       expect(parser.parse('2 ^ 3')).to eq(Exp::AST.new(Exp::AST::Exponentiation.new(
                                                          Exp::AST::Number.new(2),

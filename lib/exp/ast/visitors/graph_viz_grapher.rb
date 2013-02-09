@@ -13,10 +13,6 @@ module Exp
           graph_binary_node(graph_node(node, node.symbol), node)
         end
 
-        def visit_brackets(node)
-          visit(node.value)
-        end
-
         def visit_unary_node(node)
           graph_node(node, node.value.to_s)
         end

@@ -13,13 +13,6 @@ module Exp
           graph_node("#{underscore(node.class.name)} [#{node.value}]")
         end
 
-        def visit_brackets(node)
-          graph_node("#{underscore(node.class.name)} [(...)]")
-          indent
-          visit(node.value)
-          dedent
-        end
-
         def visit_binary_node(node)
           graph_node("#{underscore(node.class.name)} [#{node.symbol}]")
           indent

@@ -19,7 +19,7 @@ class Exp::Parser
               | expression MULTI expression           { result = Exp::AST::Multiplication.new(val[0], val[2]) }
               | expression DIV expression             { result = Exp::AST::Division.new(val[0], val[2]) }
               | expression POW expression             { result = Exp::AST::Exponentiation.new(val[0], val[2]) }
-              | LEFT_BRACKET expression RIGHT_BRACKET { result = Exp::AST::Brackets.new(val[1]) }
+              | LEFT_BRACKET expression RIGHT_BRACKET { result = val[1] }
               | SUB NUMBER =UMINUS                    { result = Exp::AST::Number.new(-1 * val[1]) }
               | NUMBER                                { result = Exp::AST::Number.new(val[0]) }
               | VAR                                   { result = Exp::AST::Variable.new(val[0]) }

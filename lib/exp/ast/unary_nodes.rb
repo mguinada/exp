@@ -12,12 +12,6 @@ module Exp
       end
     end
 
-    class Brackets < UnaryNode
-      def eval(ctx)
-        value.eval(ctx)
-      end
-    end
-
     class Literal < UnaryNode; end
 
     class Number < Literal
