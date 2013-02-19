@@ -3,7 +3,6 @@ module Exp
     NUMBER        = /(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?/
     LEFT_BRACKET  = /\(/
     RIGHT_BRACKET = /\)/
-    SQRT          = /SQRT/
     ADD           = /[+]/
     SUB           = /[-]/
     MULTI         = /[*]/
@@ -33,7 +32,6 @@ module Exp
       when value = @scanner.scan(NUMBER)        then [:NUMBER, begin Integer(value) rescue Float(value) end]
       when value = @scanner.scan(LEFT_BRACKET)  then [:LEFT_BRACKET, value]
       when value = @scanner.scan(RIGHT_BRACKET) then [:RIGHT_BRACKET, value]
-      when value = @scanner.scan(SQRT)          then [:SQRT, value]
       when value = @scanner.scan(ADD)           then [:ADD, value]
       when value = @scanner.scan(SUB)           then [:SUB, value]
       when value = @scanner.scan(MULTI)         then [:MULTI, value]

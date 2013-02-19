@@ -13,6 +13,7 @@ module Exp
 
     def bind(hash = {})
       @context.bind(hash)
+      self
     end
 
     def accept(visitor)
@@ -39,7 +40,7 @@ module Exp
     end
 
     def grapher(opts = {})
-      visitor = case opts.fetch(:engine, 'ascii').to_s
+      visitor = case opts.fetch(:format, 'ascii').to_s
                 when 'graphviz'
                   Visitors::GraphVizGrapher.new
                 else

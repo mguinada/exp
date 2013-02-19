@@ -33,7 +33,7 @@ describe Exp::AST do
   context 'provides graphical representations' do
     it 'graphviz' do
       require 'ruby-graphviz'
-      expect(ast.grapher(engine: 'graphviz')).to be_a(Exp::AST::Visitors::GraphVizGrapher)
+      expect(ast.grapher(format: 'graphviz')).to be_a(Exp::AST::Visitors::GraphVizGrapher)
     end
 
     it 'defaults to ASCII' do
