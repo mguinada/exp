@@ -10,8 +10,12 @@ module Exp
         end
 
         def visit(node)
-          super
-          @block.call(node) if @block
+          if @block
+            @block.call(node)
+            super
+          else
+            Enumerator.new(node, :each)
+          end
         end
       end
     end

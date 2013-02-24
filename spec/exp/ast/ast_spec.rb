@@ -27,6 +27,8 @@ describe Exp::AST do
 
   it 'is enumerable' do
     ast = Exp::Parser.new.parse('1 * 2 / (3 + 4) - 5')
+
+    expect(ast.each).to be_a(Enumerator)
     expect(ast.select(&:literal?).map(&:value)).to eq([1, 2, 3, 4, 5])
   end
 

@@ -21,7 +21,7 @@ module Exp
     end
 
     def each(&block)
-      root.accept(Visitors::Each.new(block))
+      root.each(&block)
     end
 
     def eval

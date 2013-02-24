@@ -3,6 +3,7 @@ module Exp
     #Base class for all binary nodes
     class BinaryNode < Node
       attr_reader :symbol, :left, :right
+      alias :value :symbol
 
       def initialize(symbol, left, right)
         @symbol, @left, @right = symbol, left, right
