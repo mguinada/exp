@@ -1,29 +1,13 @@
 # Exp
 
-TODO: Write a gem description
+Exp is a simple mathematical expression processor.
 
-## Installation
+# Notice
 
-Add this line to your application's Gemfile:
+This project is experimental.
 
-    gem 'exp'
+## Copyright
+Copyright (c) 2012 Miguel Guinada
+[LICENSE][] for details.
 
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install exp
-
-## Usage
-
-TODO: Write usage instructions here
-
-## Contributing
-
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+[license]: https://github.com/mguinada/exp/blob/master/LICENSE
