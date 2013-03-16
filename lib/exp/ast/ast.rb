@@ -4,7 +4,11 @@ module Exp
   # The abstract sytanx tree
   class AST
     include Enumerable
+    extend Forwardable
+
     attr_reader :root, :context
+
+    def_delegators :root, :accept, :each
 
     def initialize(root = nil)
       @root = root
@@ -14,14 +18,6 @@ module Exp
     def bind(hash = {})
       @context.bind(hash)
       self
-    end
-
-    def accept(visitor)
-      root.accept(visitor)
-    end
-
-    def each(&block)
-      root.each(&block)
     end
 
     def eval
@@ -49,6 +45,20 @@ module Exp
 
       root.accept(visitor)
       visitor
+    end
+
+    def to_infix
+      notation(:infix)
+    end
+
+    def to_postfix
+      notation(:postfix)
+    end
+
+    private
+    def notation(notation)
+      accept(v = Visitors::Notation.new(notation))
+      v.to_s
     end
   end
 end

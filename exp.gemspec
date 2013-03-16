@@ -8,7 +8,7 @@ Gem::Specification.new do |gem|
   gem.version       = Exp::VERSION
   gem.authors       = ["Miguel Guinada"]
   gem.email         = ["mguinada@gmail.com"]
-  gem.summary       = %q{a simple mathematical expression interpreter}
+  gem.summary       = %q{a simple mathematical expression processor}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($/)

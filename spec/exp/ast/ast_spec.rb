@@ -1,5 +1,6 @@
 describe Exp::AST do
-  let(:ast) { Exp::Parser.new.parse('((7 - 2) / 0.5 * 9 ^ 2 + 1) / -99') }
+  let(:expression) { '((7 - 2) / 0.5 * 9 ^ 2 + 1) / -99' }
+  let(:ast) { Exp::Parser.new.parse(expression) }
 
   context 'evaluates' do
     it 'on defined mathematical operations' do
@@ -32,7 +33,17 @@ describe Exp::AST do
     expect(ast.select(&:literal?).map(&:value)).to eq([1, 2, 3, 4, 5])
   end
 
-  context 'provides graphical representations' do
+  context 'provides string expression representations', focus: true do
+    it 'infix notation' do
+      expect(ast.to_infix).to eq(expression)
+    end
+
+    it 'postfix notation' do
+      expect(ast.to_postfix).to eq('7 2 - 0.5 / 9 2 ^ * 1 + / 99 -')
+    end
+  end
+
+  context 'provides graphical expression representations' do
     it 'graphviz' do
       require 'ruby-graphviz'
       expect(ast.grapher(format: 'graphviz')).to be_a(Exp::AST::Visitors::GraphVizGrapher)
